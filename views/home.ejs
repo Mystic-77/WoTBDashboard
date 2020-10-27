@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="container-fluid bg-dark">
+        <div class="row">
+            <div class="col">
+                <form action="/player" method="GET" id="form">
+                    <div class="form-group">
+                        <input type="text" name="username" id="username" class="form-control-sm" placeholder="Enter your username">
+                        <select id="region" class="btn bg-light form-control-sm" name="region">            
+                            <option value="asia">Asia</option>
+                            <option value="com">North america</option>
+                            <option value="eu">Europe</option>
+                            <option value="ru">Russia</option>
+                        </select>
+                        <input type="submit" class="btn btn-warning form-control-sm">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- BATTLES -->
+            <div class="col-sm-3 stat-card" id="battles-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                    <%-'...' %> 
+                    <% } else { %>
+                        <%- stats.battles %>
+                    <% } %>
+                </div>
+                <div class="stat-card-title">BATTLES</div>
+            </div>
+
+            <!-- AVERAGE DAMAGE -->
+            <div class="col-sm-3 stat-card" id="avgdmg-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                        <%-'...' %> 
+                        <% } else { %>
+                            <%- (stats.damage_dealt / stats.battles).toPrecision(4) %>
+                        <% } %>
+                </div>
+                <div class="stat-card-title">AVERAGE DAMAGE</div>
+            </div>
+            
+            <!-- HIT RATIO -->
+            <div class="col-sm-3 stat-card" id="accuracy-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                    <%-'...' %> 
+                    <% } else { %>
+                        <%- ((stats.hits / stats.shots) * 100).toPrecision(4) + "%" %>
+                    <% } %>
+                </div>
+                <div class="stat-card-title">HIT RATIO</div>
+            </div>
+
+            <!-- MAX FRAGS IN A BATTLE -->
+            <div class="col-sm-3 stat-card" id="maxfrags-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                        <%-'...' %> 
+                        <% } else { %>
+                            <%- stats.max_frags %>
+                        <% } %>
+                </div>
+                <div class="stat-card-title">MOST VEHICLES DESTROYED IN A BATLLE</div>
+            </div>
+
+            <!-- MAX EXP IN A BATTLE -->
+            <div class="col-sm-3 stat-card" id="maxexp-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                        <%-'...' %> 
+                        <% } else { %>
+                            <%- stats.max_xp %>
+                        <% } %>
+                </div>
+                <div class="stat-card-title">MOST EXPERIENCE IN A BATTLE</div>
+            </div>
+
+            <!-- AVG TANKS SPOTTED -->
+            <div class="col-sm-3 stat-card" id="scout-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                        <%-'...' %> 
+                        <% } else { %>
+                            <%- (stats.spotted / stats.battles).toPrecision(4) %>
+                        <% } %>
+                </div>
+                <div class="stat-card-title">TANKS SPOTTED</div>
+            </div>
+
+            <!-- AVG EXPERIENCE -->
+            <div class="col-sm-3 stat-card" id="avgexp-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                        <%-'...' %> 
+                        <% } else { %>
+                            <%- (stats.xp / stats.battles).toPrecision(4) %>
+                        <% } %>
+                </div>
+                <div class="stat-card-title">AVERAGE EXPERIENCE</div>
+            </div>
+
+            <!-- DESTRUCTION RATIO -->
+            <div class="col-sm-3 stat-card" id="kdr-stat-card">
+                <div class="stat-card-value">
+                    <% if (stats == null) { %>
+                        <%-'...' %> 
+                        <% } else { %>
+                            <%- (stats.frags / stats.survived_battles).toPrecision(4) %>
+                        <% } %>
+                </div>
+                <div class="stat-card-title">DESTRUCTION RATIO</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="graph1"></div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+</html>
+

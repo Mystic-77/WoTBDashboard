@@ -1,0 +1,23 @@
+body{
+    height: 100vh;
+    background-color: #212529;
+}
+.stat-card{
+    background-color: #151b22;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    margin: 30px auto 50px auto;
+    height: 200px;
+    border: 1px solid brown;
+}
+
+.stat-card-value{
+    font-size: 70px;
+    color: orangered;
+    margin-bottom: 50px;
+}
+.stat-card-title{
+    margin-bottom: 10px;
+    font-size: 14px;
+}

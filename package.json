@@ -1,11 +1,26 @@
 {
   "name": "wotbdashboard",
   "version": "1.0.0",
-  "description": "creating a dashboard for wotb using plotly.js",
+  "description": "Dashboard for WoTB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mystichunter77/WoTBDashboard.git"
+  },
   "author": "Mystic77",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mystichunter77/WoTBDashboard/issues"
+  },
+  "homepage": "https://github.com/Mystichunter77/WoTBDashboard#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.6"
+  }
 }
