@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const graphs = require('./graphs');
 const fetch = require('node-fetch');
+const { getPlayersVehicleStatistics } = require('./graphs');
 
 
 //register view engine
@@ -19,29 +20,34 @@ app.get('/', (req,res)=>{
     res.render('home',{stats: null});
 });
 
-var graph1;
+var graph1, graph234;
 app.get('/player',async (req,res)=>{
     // console.log(req);
     let username = req.query.username;
     let region = req.query.region;
     
-    // let stats = graphs.getStats(username,region);
-    let accID = await graphs.getAccountId(username,region)
-    console.log("index file acc id :" + accID);
-    let stats = await graphs.getPlayerHomeStats(accID);
-    console.log("index file stats is : ");
-    console.log(stats);
-
+    let stats = await graphs.getStats(username,region);
     graph1 = await graphs.getGraph1Data(stats);
-    console.log(graph1);
 
-    res.render('home', {stats,graph1});
+    vehicleStats = await graphs.getPlayersVehicleStatistics(username,region);
+    // console.log(vehicleStats);
+
+    graph234 = await graphs.getGraph234Data(vehicleStats);
+
+    res.render('home', {stats});
 });
 
 app.get('/graph1', (req,res) => {
-    console.log(graph1);
+    // console.log(graph1);
     if(graph1 != null)
     {
        res.send(graph1); 
+    }
+});
+
+app.get('/graph234', (req,res) => {
+    if(graph234 != null)
+    {
+        res.send(graph234);
     }
 });

@@ -6,6 +6,7 @@
     <%- include('./partials/nav.ejs') %>
 
     <div class="container-fluid bg-dark">
+
         <div class="row">
             <div class="col">
                 <form action="/player" method="GET" id="form">
@@ -22,10 +23,10 @@
                 </form>
             </div>
         </div>
-        <div class="row">
 
+        <div class="row">
             <!-- BATTLES -->
-            <div class="col-sm-3 stat-card" id="battles-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="battles-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                     <%-'...' %> 
@@ -37,7 +38,7 @@
             </div>
 
             <!-- AVERAGE DAMAGE -->
-            <div class="col-sm-3 stat-card" id="avgdmg-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="avgdmg-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                         <%-'...' %> 
@@ -49,7 +50,7 @@
             </div>
             
             <!-- HIT RATIO -->
-            <div class="col-sm-3 stat-card" id="accuracy-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="accuracy-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                     <%-'...' %> 
@@ -61,7 +62,7 @@
             </div>
 
             <!-- MAX FRAGS IN A BATTLE -->
-            <div class="col-sm-3 stat-card" id="maxfrags-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="maxfrags-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                         <%-'...' %> 
@@ -73,7 +74,7 @@
             </div>
 
             <!-- MAX EXP IN A BATTLE -->
-            <div class="col-sm-3 stat-card" id="maxexp-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="maxexp-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                         <%-'...' %> 
@@ -85,7 +86,7 @@
             </div>
 
             <!-- AVG TANKS SPOTTED -->
-            <div class="col-sm-3 stat-card" id="scout-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="scout-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                         <%-'...' %> 
@@ -97,7 +98,7 @@
             </div>
 
             <!-- AVG EXPERIENCE -->
-            <div class="col-sm-3 stat-card" id="avgexp-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="avgexp-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                         <%-'...' %> 
@@ -109,7 +110,7 @@
             </div>
 
             <!-- DESTRUCTION RATIO -->
-            <div class="col-sm-3 stat-card" id="kdr-stat-card">
+            <div class="col-sm-12 col-md-6 col-lg-3 stat-card" id="kdr-stat-card">
                 <div class="stat-card-value">
                     <% if (stats == null) { %>
                         <%-'...' %> 
@@ -122,8 +123,17 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
                 <div id="graph1"></div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="graph2"></div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="graph3"></div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="graph4"></div>
             </div>
         </div>
     </div>

@@ -1,23 +1,27 @@
 body{
     height: 100vh;
     background-color: #212529;
+    font-size: 20px;
 }
 .stat-card{
     background-color: #151b22;
-    font-size: 50px;
     color: white;
     text-align: center;
-    margin: 30px auto 50px auto;
+    /* font-size: 70px; */
+    margin: 0px auto 0px auto;
     height: 200px;
     border: 1px solid brown;
 }
 
 .stat-card-value{
-    font-size: 70px;
+    font-size: 350%;
     color: orangered;
     margin-bottom: 50px;
 }
 .stat-card-title{
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 70%;
+}
+.container-fluid{
+    width: 100vw;
 }
