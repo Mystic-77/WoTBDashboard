@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const nodemon = require('nodemon');
 
 var appId = process.env.APP_ID;
 
@@ -148,21 +149,7 @@ async function getStats(username,region)
 async function getGraph234Data(vehicleStats)
 {
     console.log(vehicleStats);
-    let layout = {
-        font: {
-            color: "white"
-        },
-        xaxis: {
-            showgrid: false,
-            showticklabels: true,
-            dtick: true
-        },
-        yaxis: {
-            showgrid: false,
-        },
-        plot_bgcolor: "#00000000",
-        paper_bgcolor: "#00000000"
-      }
+    // let layout = 
 
     let x2 = [], y2 = [];
     let g2min = 100, g2max = 0;
@@ -190,14 +177,32 @@ async function getGraph234Data(vehicleStats)
                 color: 'orange',//'#5a9445',
                 line: {
                     width: 1.5
-                }
+                },
             }
         }],
-        layout: layout
+        layout: {
+            // title: "Winrate by Tier of tank",
+            font: {
+                color: "white"
+            },
+            xaxis: {
+                title: "Tier",
+                showgrid: false,
+                showticklabels: true,
+                dtick: true
+            },
+            yaxis: {
+                title: 'Winrate',
+                showgrid: false,
+                range: [parseInt(g2min)-2, parseInt(g2max)+2]
+            },
+            plot_bgcolor: "#00000000",
+            paper_bgcolor: "#00000000"
+          }
     };
-    graph2.layout.yaxis.range = [parseInt(g2min)-5, parseInt(g2max)+5];
+    // graph2.layout.yaxis.;
     // console.log(graph2.layout.yaxis.range);
-    console.log(graph2);
+    // console.log(graph2);
 
     let x3 = [], y3 = [];
     let g3min = 100, g3max = 0;
@@ -229,9 +234,27 @@ async function getGraph234Data(vehicleStats)
                 }
             }
         }],
-        layout: layout
+        layout: {
+            // title: 'Winrate by Nation',
+            font: {
+                color: "white"
+            },
+            xaxis: {
+                title: 'Nation',
+                showgrid: false,
+                showticklabels: true,
+                dtick: true
+            },
+            yaxis: {
+                title: 'Winrate',
+                showgrid: false,
+                range: [parseInt(g3min)-2, parseInt(g3max)+2]
+            },
+            plot_bgcolor: "#00000000",
+            paper_bgcolor: "#00000000"
+          }
     };
-    graph3.layout.yaxis.range = [parseInt(g3min)-5, parseInt(g3max)+5];
+    // graph3.layout.yaxis.range = [parseInt(g3min)-5, parseInt(g3max)+5];
 
 
     let x4 = [], y4 = [];
@@ -257,17 +280,35 @@ async function getGraph234Data(vehicleStats)
             y: y4,
             type: 'bar',
             marker: {
-                color: '#5a9445',
+                color: '#377369',
                 line: {
                     width: 1.5
                 }
             }
         }],
-        layout: layout
+        layout: {
+            // title: 'Winrate by Type of Tank',
+            font: {
+                color: "white"
+            },
+            xaxis: {
+                title: 'Type of Tank',
+                showgrid: false,
+                showticklabels: true,
+                dtick: true
+            },
+            yaxis: {
+                title: 'Winrate',
+                showgrid: false,
+                range: [parseInt(g4min)-2, parseInt(g4max)+2]
+            },
+            plot_bgcolor: "#00000000",
+            paper_bgcolor: "#00000000"
+          }
     };
-    graph4.layout.yaxis.range = [parseInt(g4min)-5, parseInt(g4max)+5];
+    // graph4.layout.yaxis.range = [parseInt(g4min)-5, parseInt(g4max)+5];
 
-    console.log(graph2,graph3,graph4);
+    // console.log(graph2,graph3,graph4);
     // console.log(keys1);
     return {graph2, graph3, graph4};
 }

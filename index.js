@@ -15,7 +15,8 @@ app.listen(8080)
 
 //routing
 
-app.get('/', (req,res)=>{
+//home page routes
+app.get(['/','/home'], (req,res)=>{
     // console.log(req);
     res.render('home',{stats: null});
 });
@@ -50,4 +51,20 @@ app.get('/graph234', (req,res) => {
     {
         res.send(graph234);
     }
+});
+
+//table page routes
+
+app.get('/table', (req, res) => {
+    res.render('table');
+});
+
+//map page routes
+app.get('/map', (req, res) => {
+    res.render('table');
+});
+
+//tech tree page routes
+app.get('/table', (req, res) => {
+    res.render('table');
 });
