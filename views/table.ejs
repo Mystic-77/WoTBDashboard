@@ -2,7 +2,97 @@
 <html lang="en">
     <%- include('./partials/head.ejs') %> 
     <body>
-        <%- include('./partials/nav.ejs') %>
+        <div class="container-fluid bg-dark">
+            <%- include('./partials/nav.ejs') %>
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+        
+                    <h4>Nations</h4>
+                    <ul>
+                        <li><img src="svg/usa.svg" width="30px" height="20px">USA</li>
+                        <li><img src="svg/uk.svg" width="30px" height="20px">Britain</li>
+                        <li><img src="svg/european.svg" width="30px" height="20px">European Union</li>
+                        <li><img src="svg/france.svg" width="30px" height="20px">France</li>
+                        <li><img src="svg/germany.svg" width="30px" height="20px">Germany</li>
+                        <li><img src="svg/china.svg" width="30px" height="20px">China</li>
+                        <li><img src="svg/japan.svg" width="30px" height="20px">Japan</li>
+                        <li><img src="svg/other.svg" width="30px" height="20px">Hybrid</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h4>Type</h4>
+                    <ul>
+                        <li><img src="svg/lightTank.svg" width="20px" height="20px">Light tanks</li>
+                        <li><img src="svg/mediumTank.svg" width="20px" height="20px">Medium Tanks</li>
+                        <li><img src="svg/heavyTank.svg" width="20px" height="20px">Heavy Tanks</li>
+                        <li><img src="svg/AT-SPG.svg" width="20px" height="20px">Tank Destroyers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">  
+                <!-- <div class="col-sm-12"> -->
+
+                <%if (table == null) { %>
+                    <%- `empty table` %>
+                <% } else { %>
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <td>Nation</td>
+                                <td>Type</td>
+                                <td>Tier</td>
+                                <td>Name</td>
+                                <td>Battles</td>
+                                <td>Wins</td>
+                                <td>losses</td>
+                                <td>Winrate</td>
+                                <td>Survived</td>
+                                <td>Avg.DMG</td>
+                                <td>Avg.Spotted</td>
+                                <td>Hit Ratio</td>
+                                <td>KDR</td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <% for( let index = 0; index < table.length; index++ ) { %>
+                            <% if (table[index].info != null) { %>
+                                <tr>
+                                    <td><img src="svg/<%- table[index].info.nation %>.svg" width="60px" height="40px"></td>
+                                    <td><img src="svg/<%- table[index].info.type %>.svg" width="20px" height="20px"></td>
+
+                                    <td><span class="<% if (table[index].info.is_premium) { %>
+                                        <%- "premium" %>
+                                    <% } %>">
+                                    <%- table[index].info.tier %>
+                                    </span></td>
+
+                                    <td><span class="<% if (table[index].info.is_premium) { %>
+                                        <%- "premium" %>
+                                    <% } %>">
+                                    <%- table[index].info.name %>
+                                    </span></td>
+
+                                    <td><%- table[index].all.battles %></td>
+                                    <td><%- table[index].all.wins %></td>
+                                    <td><%- table[index].all.losses %></td>
+                                    <td><%- ((table[index].all.wins / table[index].all.battles) * 100).toPrecision(3) %></td>
+                                    <td><%- table[index].all.survived_battles %></td>
+                                    <td><%- (table[index].all.damage_dealt / table[index].all.battles).toPrecision(4) %></td>
+                                    <td><%- (table[index].all.spotted / table[index].all.battles).toPrecision(3) %></td>
+                                    <td><%- (table[index].all.hits / table[index].all.shots).toPrecision(2) %></td>
+                                    <td><%- (table[index].all.frags / (table[index].all.battles - table[index].all.survived_battles)).toPrecision(3) %></td>
+                                </tr>
+                            <% } %>
+                                
+                           <% } %>
+                        </tbody>
+                    </table>
+                <% } %> 
+                <!-- </div> -->
+            </div>
+        </div>
         
         <%- include('./partials/footer.ejs') %>
     </body>

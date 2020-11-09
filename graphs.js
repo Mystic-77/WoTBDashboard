@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
-const nodemon = require('nodemon');
+
 
 var appId = process.env.APP_ID;
+var pVehicleStats, tanks;
 
 async function getAccountId(username, region)
 {
@@ -67,8 +68,8 @@ async function getGraph1Data(stats)
 async function getPlayersVehicleStatistics(username, region)
 {
     let accID = await getAccountId(username,region);
-    var tanks = await getTankopedia();
-    var pVehicleStats = await fetch(`https://api.wotblitz.asia/wotb/tanks/stats/?application_id=${appId}&language=en&account_id=${accID}`).then(res => {
+    tanks = await getTankopedia();
+    pVehicleStats = await fetch(`https://api.wotblitz.asia/wotb/tanks/stats/?application_id=${appId}&language=en&account_id=${accID}`).then(res => {
         return res.json();
     }).catch(err => {
         console.log(err);
@@ -123,12 +124,13 @@ async function getPlayersVehicleStatistics(username, region)
     typeMap = ([...typeMap.entries()].sort((a,b) => a - b));
 
     return {tierMap, nationMap, typeMap};
-}
+} 
+
 
 
 async function getTankopedia()
 {
-    var tanks = await fetch(`https://api.wotblitz.asia/wotb/encyclopedia/vehicles/?application_id=${appId}&language=en&fields=name%2Cnation%2Ctype%2Ctier`).then(res => {
+    var tanks = await fetch(`https://api.wotblitz.asia/wotb/encyclopedia/vehicles/?application_id=${appId}&language=en&fields=tier%2Ctype%2Cnation%2Cname%2Cdescription%2Cis_premium%2Cnext_tanks`).then(res => {
         return res.json();
     }).catch(err => {
         console.log(err);
@@ -313,11 +315,32 @@ async function getGraph234Data(vehicleStats)
     return {graph2, graph3, graph4};
 }
 
+async function getPlayerTankStats()
+{
+    if(pVehicleStats != null)
+    {
+        pVehicleStats.data[accID].forEach(element => {
+        let tank_id = element.tank_id;
+        let info = tanks.data[tank_id];
+
+        if(info !== undefined)
+        {
+            element.info = info;
+        }
+    });
+    console.log("graphs stats vehicle test");
+    console.log(pVehicleStats.data[accID]);
+    return pVehicleStats.data[accID];
+    }
+    
+}
+
 module.exports = {
     getAccountId,
     getPlayerHomeStats,
     getGraph1Data,
     getGraph234Data,
     getStats,
-    getPlayersVehicleStatistics
+    getPlayersVehicleStatistics,
+    getPlayerTankStats
 };

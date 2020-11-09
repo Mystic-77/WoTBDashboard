@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const graphs = require('./graphs');
-const fetch = require('node-fetch');
-const { getPlayersVehicleStatistics } = require('./graphs');
+const common = require('./commonData');
+const { getAccountId } = require('./graphs');
 
 
 //register view engine
@@ -21,11 +21,12 @@ app.get(['/','/home'], (req,res)=>{
     res.render('home',{stats: null});
 });
 
-var graph1, graph234;
+var username, region;
+var graph1, graph234, table;
 app.get('/player',async (req,res)=>{
     // console.log(req);
-    let username = req.query.username;
-    let region = req.query.region;
+    username = req.query.username;
+    region = req.query.region;
     
     let stats = await graphs.getStats(username,region);
     graph1 = await graphs.getGraph1Data(stats);
@@ -34,6 +35,8 @@ app.get('/player',async (req,res)=>{
     // console.log(vehicleStats);
 
     graph234 = await graphs.getGraph234Data(vehicleStats);
+    table = await graphs.getPlayerTankStats();
+
 
     res.render('home', {stats});
 });
@@ -55,16 +58,19 @@ app.get('/graph234', (req,res) => {
 
 //table page routes
 
-app.get('/table', (req, res) => {
-    res.render('table');
+app.get('/table', async (req, res) => {
+    // table.forEach(element => {
+    //     console.log(element.info.nation);
+    // });
+    res.render('table', {table});
 });
 
 //map page routes
 app.get('/map', (req, res) => {
-    res.render('table');
+    res.render('map');
 });
 
 //tech tree page routes
 app.get('/table', (req, res) => {
-    res.render('table');
+    res.render('techtree');
 });

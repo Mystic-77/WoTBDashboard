@@ -24,4 +24,28 @@ body{
 }
 .container-fluid{
     width: 100vw;
+    color: white;
+}
+
+thead
+{
+    background-color: #5a9445;
+}
+
+li{
+    list-style-type: none;
+    text-align: left;
+}
+
+
+h4{
+    text-align: left;
+}
+
+li img{
+    margin: 10px 40px 10px auto;
+}
+
+.premium{
+    color: goldenrod;
 }
