@@ -2,9 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const graphs = require('./graphs');
-const common = require('./commonData');
-const { getAccountId } = require('./graphs');
-
 
 //register view engine
 app.set('view engine', 'ejs');
