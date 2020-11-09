@@ -70,6 +70,12 @@ app.get('/map', (req, res) => {
     res.render('map');
 });
 
+app.get('/mapdata', async (req, res) => {
+    let mapdata = await graphs.getServerInfo();
+    console.log(mapdata);
+    res.send(mapdata);
+});
+
 //tech tree page routes
 app.get('/table', (req, res) => {
     res.render('techtree');

@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 
 
 var appId = process.env.APP_ID;
+var mapboxAccessToken = process.env.MAPBOX_KEY;
 var pVehicleStats, tanks;
 
 async function getAccountId(username, region)
@@ -328,11 +329,90 @@ async function getPlayerTankStats()
             element.info = info;
         }
     });
-    console.log("graphs stats vehicle test");
-    console.log(pVehicleStats.data[accID]);
+    // console.log("graphs stats vehicle test");
+    // console.log(pVehicleStats.data[accID]);
     return pVehicleStats.data[accID];
     }
     
+}
+
+async function getServerInfo()
+{
+    var asia = await fetch(`https://api.worldoftanks.asia/wgn/servers/info/?application_id=${appId}&game=wotb&language=en`).then(res => {
+        return res.json();
+    });
+    console.log(asia);
+    var playersAsia = asia.data.wotb[0].players_online;
+    console.log(playersAsia);
+
+    var russia = await fetch(`https://api.worldoftanks.ru/wgn/servers/info/?application_id=${appId}&game=wotb&language=en`).then(res => {
+        return res.json();
+    });
+    console.log(russia);
+    var playersRu = russia.data.wotb[0].players_online;
+    console.log(playersRu);
+
+    var europe = await fetch(`https://api.worldoftanks.eu/wgn/servers/info/?application_id=${appId}&game=wotb&language=en`).then(res => {
+        return res.json();
+    });
+    console.log(europe);
+    var playersEu = europe.data.wotb[0].players_online;
+    console.log(playersEu);
+
+    var na = await fetch(`https://api.worldoftanks.com/wgn/servers/info/?application_id=${appId}&game=wotb&language=en`).then(res => {
+        return res.json();
+    });
+    console.log(na);
+    var playersNa = na.data.wotb[0].players_online;
+    console.log(playersNa);
+
+    serverLats = [37.5637733, 54.931473, 47.1192253, 51.5285582];
+    serverLons = [126.8340022, 99.4009439, -124.786949, -0.2416809];
+    mapdata = {};
+
+    var data = [{
+        type: 'scattermapbox',
+        mode: 'markers',
+        hoverinfo: 'text',
+        text: [`Asia<br>Players online : ${playersAsia}`, `Russia<br>Players online : ${playersRu}`, `North America<br>Players online : ${playersNa}`, `Europe<br>Players online : ${playersEu}`],
+        lat: serverLats,
+        lon: serverLons,
+        marker: {
+            size: [playersAsia/100, playersRu/500, playersNa/100, playersEu/100],
+            // size: 50,
+            color: ['rgba(181, 37, 160, 0.6)', 'rgba(37,174,181,0.6)', 'rgba(54, 181, 37, 0.6)', 'rgba(237, 238, 13, 0.6)']
+        }
+    }];
+
+    var layout = {
+        title: 'Players currently online from each server',
+        width: '1500',
+        height: '800',
+        font: {
+            color: '#FFF'
+        },
+        dragmode: 'zoom',
+        mapbox:{
+            domain: {
+                x: [0, 1],
+                y: [0, 1]
+              },
+            style: 'dark',
+            zoom: 1.7,
+            center: {
+                lat:30,
+                lon:100
+              }
+        },
+        paper_bgcolor: '#00000000',
+        plot_bgcolor: '#00000000',
+        showlegend: false
+    };
+
+    var config = {mapboxAccessToken: mapboxAccessToken};
+
+    mapdata = {data, layout, config};
+    return mapdata;
 }
 
 module.exports = {
@@ -342,5 +422,6 @@ module.exports = {
     getGraph234Data,
     getStats,
     getPlayersVehicleStatistics,
-    getPlayerTankStats
+    getPlayerTankStats,
+    getServerInfo
 };
