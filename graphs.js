@@ -366,8 +366,8 @@ async function getServerInfo()
     var playersNa = na.data.wotb[0].players_online;
     console.log(playersNa);
 
-    serverLats = [37.5637733, 54.931473, 47.1192253, 51.5285582];
-    serverLons = [126.8340022, 99.4009439, -124.786949, -0.2416809];
+    serverLats = [37.5637733, 54.931473, 38.9764537, 51.5285582];
+    serverLons = [126.8340022, 99.4009439, -107.7937971, -0.2416809];
     mapdata = {};
 
     var data = [{
@@ -378,7 +378,7 @@ async function getServerInfo()
         lat: serverLats,
         lon: serverLons,
         marker: {
-            size: [playersAsia/100, playersRu/500, playersNa/100, playersEu/100],
+            size: [playersAsia/100, playersRu/500, playersNa/100, playersEu/150],
             // size: 50,
             color: ['rgba(181, 37, 160, 0.6)', 'rgba(37,174,181,0.6)', 'rgba(54, 181, 37, 0.6)', 'rgba(237, 238, 13, 0.6)']
         }
@@ -401,7 +401,7 @@ async function getServerInfo()
             zoom: 1.7,
             center: {
                 lat:30,
-                lon:100
+                lon:120
               }
         },
         paper_bgcolor: '#00000000',
