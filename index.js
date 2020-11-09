@@ -77,6 +77,6 @@ app.get('/mapdata', async (req, res) => {
 });
 
 //tech tree page routes
-app.get('/table', (req, res) => {
+app.get('/techtree', (req, res) => {
     res.render('techtree');
 });
